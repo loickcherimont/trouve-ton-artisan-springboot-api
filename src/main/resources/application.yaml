@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: trouve-ton-artisan-springboot-api
