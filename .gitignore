@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Test & CI artifacts ###
+postman/
+app.log

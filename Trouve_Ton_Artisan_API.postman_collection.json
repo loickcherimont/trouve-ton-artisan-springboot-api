@@ -1,0 +1,41 @@
+{
+  "info": {
+    "_postman_id": "f3e4d6ac-9012-43ed-bb6b-cb034e32f143",
+    "name": "Trouve_Ton_Artisan_API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45033578"
+  },
+  "item": [
+    {
+      "name": "GET /api/categories",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "/**\n * Retrieves the HTTP response and the categories.\n * @type {Response}\n */\nconst response = pm.response;\nconst categories = response.json();\n\n/**\n * Verifies that the API returns HTTP status 200.\n */\npm.test(\"HTTP status must be 200\", () => {\n    pm.response.to.have.status(200);\n});\n\n/**\n * Verifies that the Content-Type header indicates a JSON response.\n */\npm.test(\"Content-Type is JSON\", () => {\n    pm.response.to.have.header(\"Content-Type\");\n    pm.expect(response.headers.get(\"Content-Type\"))\n        .to.include(\"application/json\");\n});\n\n/**\n * Verifies that the response is a non-empty array.\n */\npm.test(\"Response is a non-empty array\", () => {\n    pm.expect(categories).to.be.an(\"array\").that.is.not.empty;\n});\n\n/**\n * Verifies that the API returns exactly four categories.\n */\npm.test(\"API returns 4 categories\", () => {\n    pm.expect(categories).to.have.lengthOf(4);\n});\n\n/**\n * Verifies that each category contains the expected fields and types.\n */\npm.test(\"Each category contains the expected fields and types\", () => {\n    categories.forEach((category) => {\n        pm.expect(category).to.have.all.keys(\"id\", \"name\", \"slug\");\n        pm.expect(category.id).to.be.a(\"number\");\n        pm.expect(category.name).to.be.a(\"string\").and.not.empty;\n        pm.expect(category.slug).to.be.a(\"string\").and.not.empty;\n    });\n});\n\n/**\n * Verifies that category IDs and slugs are unique.\n */\npm.test(\"Category IDs and slugs are unique\", () => {\n    const ids = categories.map((category) => category.id);\n    const slugs = categories.map((category) => category.slug);\n\n    const uniqueIds = new Set(ids);\n    const uniqueSlugs = new Set(slugs);\n\n    pm.expect(uniqueIds.size).to.equal(ids.length);\n    pm.expect(uniqueSlugs.size).to.equal(slugs.length);\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/categories",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
