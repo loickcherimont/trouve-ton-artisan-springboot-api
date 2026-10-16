@@ -35,8 +35,8 @@ Back-end REST API built with **Spring Boot** to connect homeowners with craftsme
 
 ```bash
 # 1. Clone repository
-git clone <repo-url>
-cd trouve_ton_artisan-api
+git clone https://github.com/loickcherimont/trouve-ton-artisan-springboot-api.git
+cd trouve-ton-artisan-springboot-api/
 
 # 2. Run the API (development)
 ./mvnw spring-boot:run
@@ -71,8 +71,8 @@ Database credentials for local dev are defined in `compose.yaml` (`myuser`/`secr
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
 | GET | `/api/categories` | List all professional categories | ✅ Public |
-| GET | `/api/artisans` | List all artisans (filters: `inTopThree`, `name`) | ✅ Public |
-| GET | `/api/artisans/{id}` | Get a single artisan by id | ✅ Public |
+| GET | `/api/craftsmen` | List all craftsmen (filters: `inTopThree`, `fullNameContains`) | ✅ Public |
+| GET | `/api/craftsmen/{id}` | Get a single craftsman by id | ✅ Public |
 | POST | `/api/contact` | Submit the contact form (sends an email to the artisan) | ✅ Public |
 
 ### 1. List All Categories
@@ -95,25 +95,25 @@ curl http://localhost:8080/api/categories
 ### 2. List All Artisans
 
 ```bash
-curl http://localhost:8080/api/artisans
+curl http://localhost:8080/api/craftsmen
 ```
 
 **With filters — only the top 3 artisans of the home page:**
 
 ```bash
-curl "http://localhost:8080/api/artisans?inTopThree=true"
+curl "http://localhost:8080/api/craftsmen?inTopThree=true"
 ```
 
 **Search by name:**
 
 ```bash
-curl "http://localhost:8080/api/artisans?name=vallis"
+curl "http://localhost:8080/api/craftsmen?fullNameContains=vallis"
 ```
 
 ### 3. Get a Single Artisan
 
 ```bash
-curl http://localhost:8080/api/artisans/1
+curl http://localhost:8080/api/craftsmen/1
 ```
 
 **Response (200 OK):**
