@@ -1,1 +1,10 @@
-spring.application.name=trouve_ton_artisan
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  application:
+    name: trouve_ton_artisan
+  jpa:
+    hibernate:
+      # No migration tool (Flyway/Liquibase) in this project:
+      # Hibernate creates/updates the schema from the JPA entities.
+      ddl-auto: update

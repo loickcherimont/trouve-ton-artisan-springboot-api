@@ -1,0 +1,10 @@
+spring: 
+  datasource: 
+    url: jdbc:postgresql://localhost:5432/trouve_ton_artisan_db
+    username: compose-postgres
+    password: compose-postgres
+  sql:
+    init:
+      mode: always
+  jpa:
+    defer-datasource-initialization: true

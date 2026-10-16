@@ -1,0 +1,6 @@
+# Production profile — never expose the OpenAPI documentation.
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

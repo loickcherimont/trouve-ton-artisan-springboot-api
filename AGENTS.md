@@ -16,7 +16,8 @@ Fictional REST API helping people find a craftsman (artisans, categories, contac
 ## Build and test commands
 
 - `./mvnw spring-boot:run` — dev server on `http://localhost:8080`; auto-starts Postgres from `compose.yaml` (Docker must be running)
-- `./mvnw test` — full suite (Testcontainers requires Docker)
+- `./mvnw test` — unit tests only (Surefire, pattern `*Test`, no Docker needed)
+- `./mvnw verify` — unit tests + integration tests (Failsafe, pattern `*IT`, Testcontainers requires Docker)
 - `./mvnw test -Dtest=SomeTest` — single test class
 - `./mvnw package` — build the jar
 
@@ -35,7 +36,8 @@ Fictional REST API helping people find a craftsman (artisans, categories, contac
 
 ## Testing instructions
 
-- `@SpringBootTest` classes must `@Import(TestcontainersConfiguration.class)` — it provides the PostgreSQL container via `@ServiceConnection`
+- Naming: `*Test` = unit tests (Surefire, run with `./mvnw test`), `*IT` = integration tests (Failsafe, run with `./mvnw verify`)
+- `@SpringBootTest`/`@DataJpaTest` classes must `@Import(TestcontainersConfiguration.class)` — it provides the PostgreSQL container via `@ServiceConnection`, and must be named `*IT`
 - `TestTrouveTonArtisanApplication` boots the real app against a Testcontainers-managed Postgres for manual testing (no local DB needed)
 - Plain unit tests (JUnit/Mockito) need no container — prefer them over context-loading tests
 
