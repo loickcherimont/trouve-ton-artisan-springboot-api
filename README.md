@@ -71,7 +71,7 @@ Database credentials for local dev are defined in `compose.yaml` (`myuser`/`secr
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
 | GET | `/api/categories` | List all professional categories | ✅ Public |
-| GET | `/api/artisans` | List all artisans (filters: `is_in_top_three`, `name`) | ✅ Public |
+| GET | `/api/artisans` | List all artisans (filters: `inTopThree`, `name`) | ✅ Public |
 | GET | `/api/artisans/{id}` | Get a single artisan by id | ✅ Public |
 | POST | `/api/contact` | Submit the contact form (sends an email to the artisan) | ✅ Public |
 
@@ -101,7 +101,7 @@ curl http://localhost:8080/api/artisans
 **With filters — only the top 3 artisans of the home page:**
 
 ```bash
-curl "http://localhost:8080/api/artisans?is_in_top_three=true"
+curl "http://localhost:8080/api/artisans?inTopThree=true"
 ```
 
 **Search by name:**
@@ -120,14 +120,14 @@ curl http://localhost:8080/api/artisans/1
 ```json
 {
   "id": 1,
-  "name": "Vallis Bellemare",
-  "rating": 4,
+  "fullName": "Vallis Bellemare",
+  "mark": 4,
   "city": "Vienne",
   "about": "Artisan passionné...",
   "email": "v.bellemare@exemple.fr",
   "website": null,
-  "is_in_top_three": false,
-  "specialties_id": 1
+  "inTopThree": false,
+  "specialtiesId": 1
 }
 ```
 
