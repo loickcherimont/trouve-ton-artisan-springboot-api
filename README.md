@@ -1,6 +1,6 @@
 # 🛠️ Trouve ton artisan API
 
-Back-end REST API built with **Spring Boot** to connect homeowners with craftsmen from the **Auvergne-Rhône-Alpes** region. It exposes the artisans and categories catalog, handles the contact form[...]
+Back-end REST API built with **Spring Boot** to connect homeowners with craftsmen from the **Auvergne-Rhône-Alpes** region. It exposes the craftsmen and categories catalog, handles the contact form and sends a message to the selected artisan by email.
 
 > **Status:** early development — the endpoint contract below mirrors the [Express version](https://github.com/loickcherimont/api-trouve-ton-artisan-express) of this API.
 
