@@ -1,6 +1,6 @@
 # 🛠️ Trouve ton artisan API
 
-Back-end REST API built with **Spring Boot** to connect homeowners with craftsmen from the **Auvergne-Rhône-Alpes** region. It exposes the artisans and categories catalog, handles the contact form emails, and serves interactive API documentation with Swagger UI.
+Back-end REST API built with **Spring Boot** to connect homeowners with craftsmen from the **Auvergne-Rhône-Alpes** region. It exposes the artisans and categories catalog, handles the contact form[...]
 
 > **Status:** early development — the endpoint contract below mirrors the [Express version](https://github.com/loickcherimont/api-trouve-ton-artisan-express) of this API.
 
@@ -71,7 +71,7 @@ Database credentials for local dev are defined in `compose.yaml` (`myuser`/`secr
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
 | GET | `/api/categories` | List all professional categories | ✅ Public |
-| GET | `/api/artisans` | List all artisans (filters: `est_en_top_trois`, `nom`) | ✅ Public |
+| GET | `/api/artisans` | List all artisans (filters: `is_in_top_three`, `name`) | ✅ Public |
 | GET | `/api/artisans/{id}` | Get a single artisan by id | ✅ Public |
 | POST | `/api/contact` | Submit the contact form (sends an email to the artisan) | ✅ Public |
 
@@ -86,7 +86,7 @@ curl http://localhost:8080/api/categories
 [
   {
     "id": 1,
-    "nom": "Bâtiment",
+    "name": "Bâtiment",
     "slug": "batiment"
   }
 ]
@@ -101,13 +101,13 @@ curl http://localhost:8080/api/artisans
 **With filters — only the top 3 artisans of the home page:**
 
 ```bash
-curl "http://localhost:8080/api/artisans?est_en_top_trois=true"
+curl "http://localhost:8080/api/artisans?is_in_top_three=true"
 ```
 
 **Search by name:**
 
 ```bash
-curl "http://localhost:8080/api/artisans?nom=vallis"
+curl "http://localhost:8080/api/artisans?name=vallis"
 ```
 
 ### 3. Get a Single Artisan
@@ -120,18 +120,18 @@ curl http://localhost:8080/api/artisans/1
 ```json
 {
   "id": 1,
-  "nom": "Vallis Bellemare",
-  "note": 4,
-  "ville": "Vienne",
-  "a_propos": "Artisan passionné...",
+  "name": "Vallis Bellemare",
+  "rating": 4,
+  "city": "Vienne",
+  "about": "Artisan passionné...",
   "email": "v.bellemare@exemple.fr",
-  "site_web": null,
-  "est_en_top_trois": false,
-  "specialites_id": 1
+  "website": null,
+  "is_in_top_three": false,
+  "specialties_id": 1
 }
 ```
 
-**Response (404 Not Found):** `{ "error": 404, "message": "Artisan introuvable" }`
+**Response (404 Not Found):** `{ "error": 404, "message": "Artisan not found" }`
 
 ### 4. Submit the Contact Form
 
@@ -139,9 +139,9 @@ curl http://localhost:8080/api/artisans/1
 curl -X POST http://localhost:8080/api/contact \
   -H "Content-Type: application/json" \
   -d '{
-    "nom": "Jeanne Dupont",
+    "name": "Jeanne Dupont",
     "email": "jeanne.dupont@mail.fr",
-    "objet": "Devis plomberie",
+    "subject": "Devis plomberie",
     "message": "Bonjour, j'aimerais un devis pour...",
     "to": "v.bellemare@exemple.fr"
   }'
